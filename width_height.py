@@ -1,4 +1,3 @@
-import bpy
 import tkinter
 
 screen_width = None
