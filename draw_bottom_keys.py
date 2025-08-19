@@ -1,7 +1,7 @@
-import bpy
-import gpu
+import bpy,gpu,os
 from gpu_extras.batch import batch_for_shader
-import os
+from . import width_height
+
 
 class draw_keyss:
     def __init__(self, image_path):
@@ -18,9 +18,6 @@ class draw_keyss:
                 os.path.join(script_dir, "shortcuts", self.image_path)
             )
 
-        if not os.path.exists(self.image_path):
-            raise FileNotFoundError(f"Image file not found: {self.image_path}")
-
         self.image = bpy.data.images.load(self.image_path)
         self.texture = gpu.texture.from_image(self.image)
 
@@ -29,60 +26,26 @@ class draw_keyss:
         else:
             self.shader = gpu.shader.from_builtin('IMAGE')
 
-        area_width = bpy.context.area.width
-        area_height = bpy.context.area.height
-
-        self.left = (area_width - 150) // 2
-        self.right = self.left + 150
-
-        asset_shelf_height = self.get_asset_shelf_height()
-        height = asset_shelf_height + 0 # 底部向上的偏移量
-
         self.vertices = {
             "pos": [
-                (self.left, height),
-                (self.right, height),
-                (self.right, 20 + height),
-                (self.left, 20 + height)
+                (0, 0),
+                (width_height.screen_width, 0),
+                (width_height.screen_width, width_height.screen_height),
+                (0, width_height.screen_height)
             ],
             "texCoord": [(0, 0), (1, 0), (1, 1), (0, 1)],
         }
         self.batch = batch_for_shader(self.shader, 'TRI_FAN', self.vertices)
 
-        self.draw_handler = bpy.types.SpaceView3D.draw_handler_add(
-            self.view3d_draw_callback, (), 'WINDOW', 'POST_PIXEL'
-        )
+        self.draw_handler = bpy.types.SpaceView3D.draw_handler_add(self.view3d_draw_callback, (), 'WINDOW', 'POST_PIXEL')
 
         bpy.app.timers.register(self.check_redraw, persistent=True)
 
         self.show()
 
-    def get_asset_shelf_height(self):
-        asset_shelf_height = 0
-        for area in bpy.context.screen.areas:
-            if area.type == 'VIEW_3D':
-                for region in area.regions:
-                    if region.type == "ASSET_SHELF":
-                        asset_shelf_height = region.height
-                        break
-        return asset_shelf_height
-
-    def update_asset_shelf_height(self):
-        asset_shelf_height = self.get_asset_shelf_height()
-        area_height = bpy.context.area.height
-        height = asset_shelf_height + 0 # 底部向上偏移量
-
-        new_pos = [
-            (self.left, height),
-            (self.right, height),
-            (self.right, 20 + height),
-            (self.left, 20 + height),
-        ]
-        self.vertices["pos"] = new_pos
-        self.batch = batch_for_shader(self.shader, 'TRI_FAN', self.vertices)
 
     def draw(self):
-        self.update_asset_shelf_height()
+        self.batch = batch_for_shader(self.shader, 'TRI_FAN', self.vertices)
         gpu.state.blend_set('ALPHA')
         self.shader.bind()
         self.shader.uniform_sampler("image", self.texture)
