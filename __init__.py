@@ -17,6 +17,7 @@ ADDON_NAME = os.path.basename(os.path.dirname(__file__))
 
 addon_keymaps = []
 
+from . import width_height	
 from . no_shortcut import NS_OT_no_shortcut
 
 def register_keymaps():
@@ -32,6 +33,7 @@ def unregister_keymaps():
     addon_keymaps.clear()
 
 def register():
+    width_height.get_width_height()
     bpy.utils.register_class(NS_OT_no_shortcut)
     register_keymaps()
     
@@ -41,6 +43,7 @@ def unregister():
 
     unregister_keymaps()
     bpy.utils.unregister_class(NS_OT_no_shortcut)
+    pass
     
 
 
