@@ -1,10 +1,9 @@
 import bpy,gpu,os
 from gpu_extras.batch import batch_for_shader
 from . import width_height
-from .draw_top_key import draw_keyboard
 
 
-class DrawBottomKey:
+class DrawTopKey:
     def __init__(self, image_path):
         self.image_path = image_path
         self.handler = None
@@ -94,24 +93,23 @@ class DrawBottomKey:
 
 
 # 全局控制变量
-bottom_key = None
+top_key = None
 
-def draw_keys(image_name):
-    global bottom_key
-    if bottom_key:
-        bottom_key.cleanup()
-        bottom_key = None
+def draw_keyboard(image_name):
+    global top_key
+    if top_key:
+        top_key.cleanup()
+        top_key = None
         bpy.app.timers.register(lambda: None, first_interval=0.1)
     
-    bottom_key = DrawBottomKey(image_name)
-    draw_keyboard("KEYBOARD.png")
-    return bottom_key
+    top_key = DrawTopKey(image_name)
+    return top_key
 
 def register():
     pass
 
 def unregister():
-    global bottom_key
-    if bottom_key:
-        bottom_key.cleanup()
-        bottom_key = None
+    global top_key
+    if top_key:
+        top_key.cleanup()
+        top_key = None

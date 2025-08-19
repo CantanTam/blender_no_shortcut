@@ -1,6 +1,9 @@
 import bpy
 from .draw_background import draw_background
 from .draw_bottom_keys import draw_keys
+from . import draw_bottom_keys
+from .draw_top_key import draw_keyboard
+from . import draw_top_key
 
 def close_gizmo_overlay():
     new_window = bpy.context.window_manager.windows[-1].screen.areas[0].spaces[0]
@@ -44,16 +47,30 @@ class NS_OT_no_shortcut(bpy.types.Operator):
         if event.type == 'ESC' or event.type == 'ACCENT_GRAVE' and event.alt == True and event.value == 'RELEASE':
             bpy.ops.object.mode_set(mode=current_mode)
             bpy.types.SpaceView3D.draw_handler_remove(self.handle_backgroud, 'WINDOW')
+
+            # 清理残留图片纹理
+            if draw_bottom_keys.bottom_key:
+                draw_bottom_keys.bottom_key.cleanup()
+                draw_bottom_keys.bottom_key = None
+
+            # 清理残留图片纹理
+            if draw_top_key.top_key:
+                draw_top_key.top_key.cleanup()
+                draw_top_key.top_key = None
+
             bpy.ops.wm.window_close()
             return {'FINISHED'}
 
         if event.type == 'ACCENT_GRAVE':
             return {'RUNNING_MODAL'}
         
-        if event.type == 'E':
+        if event.type == 'E' or event.type == 'E' and event.alt == True:
             draw_keys("E.png")
             return {'RUNNING_MODAL'}
-
+        
+        if event.type == 'A':
+            draw_keys("A.png")
+            return {'RUNNING_MODAL'}
             
 
         return {'PASS_THROUGH'}
