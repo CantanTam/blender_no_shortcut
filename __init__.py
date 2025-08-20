@@ -18,7 +18,8 @@ ADDON_NAME = os.path.basename(os.path.dirname(__file__))
 addon_keymaps = []
 
 from . import width_height	
-from . no_shortcut import NS_OT_no_shortcut
+from .no_shortcut import NS_OT_no_shortcut
+from .shortcut_mode import NS_PG_shortcut_mode
 
 def register_keymaps():
     kc = bpy.context.window_manager.keyconfigs.addon
@@ -35,6 +36,8 @@ def unregister_keymaps():
 def register():
     width_height.get_width_height()
     bpy.utils.register_class(NS_OT_no_shortcut)
+    bpy.utils.register_class(NS_PG_shortcut_mode)
+    bpy.types.Scene.shortcut_mode = bpy.props.PointerProperty(type=NS_PG_shortcut_mode)
     register_keymaps()
     
 
@@ -42,6 +45,8 @@ def register():
 def unregister():
 
     unregister_keymaps()
+    del bpy.types.Scene.shortcut_mode
+    bpy.utils.unregister_class(NS_PG_shortcut_mode)
     bpy.utils.unregister_class(NS_OT_no_shortcut)
     pass
     

@@ -1,9 +1,11 @@
 import bpy
-from .draw_background import draw_background
-from .draw_bottom_keys import draw_keys
-from . import draw_bottom_keys
-from .draw_top_key import draw_keyboard
-from . import draw_top_key
+from .background import draw_background
+from .bottom_keys import draw_keys
+from . import bottom_keys
+from .top_keys import draw_keyboard
+from . import top_keys
+#from .draw_keys_shader import draw_keys_shader
+from . import keys_shader
 
 def close_gizmo_overlay():
     new_window = bpy.context.window_manager.windows[-1].screen.areas[0].spaces[0]
@@ -38,25 +40,39 @@ class NS_OT_no_shortcut(bpy.types.Operator):
         bpy.ops.screen.screen_full_area(use_hide_panels=True)
         
         self.handle_backgroud = bpy.types.SpaceView3D.draw_handler_add(draw_background, (self,context), 'WINDOW', 'POST_PIXEL')
+        self.handle_key_shader = bpy.types.SpaceView3D.draw_handler_add(keys_shader.draw_keys_shader, (self,context), 'WINDOW', 'POST_PIXEL')
+        draw_keyboard("KEYBOARD.png")
 
 
         context.window_manager.modal_handler_add(self)
         return {'RUNNING_MODAL'}
 
     def modal(self, context, event):
-        if event.type == 'ESC' or event.type == 'ACCENT_GRAVE' and event.alt == True and event.value == 'RELEASE':
+        if event.type == 'ACCENT_GRAVE' and event.alt == True and event.value == 'RELEASE':
+            context.scene.shortcut_mode.mode = not context.scene.shortcut_mode.mode
+            context.scene.update_tag()
+            return {'RUNNING_MODAL'}
+
+        if event.type == 'ESC':
             bpy.ops.object.mode_set(mode=current_mode)
             bpy.types.SpaceView3D.draw_handler_remove(self.handle_backgroud, 'WINDOW')
+            bpy.types.SpaceView3D.draw_handler_remove(self.handle_key_shader, 'WINDOW')
 
             # 清理残留图片纹理
-            if draw_bottom_keys.bottom_key:
-                draw_bottom_keys.bottom_key.cleanup()
-                draw_bottom_keys.bottom_key = None
+            if bottom_keys.bottom_key:
+                bottom_keys.bottom_key.cleanup()
+                bottom_keys.bottom_key = None
 
             # 清理残留图片纹理
-            if draw_top_key.top_key:
-                draw_top_key.top_key.cleanup()
-                draw_top_key.top_key = None
+            if top_keys.top_key:
+                top_keys.top_key.cleanup()
+                top_keys.top_key = None
+
+            if keys_shader.keys_shader_texture:
+                # 4.0 以上版本，无需要手动 free()
+                if bpy.app.version < (4, 0, 0):
+                    keys_shader.keys_shader_texture.free()
+                keys_shader.keys_shader_texture = None
 
             bpy.ops.wm.window_close()
             return {'FINISHED'}
@@ -71,6 +87,20 @@ class NS_OT_no_shortcut(bpy.types.Operator):
         if event.type == 'A':
             draw_keys("A.png")
             return {'RUNNING_MODAL'}
+        
+        if event.type == 'H':
+            draw_keys("A.png")
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'Q':
+            if bpy.context.scene.shortcut_mode.mode:
+                draw_keys("BLUE.png")
+            else:
+                draw_keys("RED.png")
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'CAPSLOCK':
+            return {'PASS_THROUGH'}
             
 
         return {'PASS_THROUGH'}
