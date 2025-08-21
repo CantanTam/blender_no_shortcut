@@ -206,6 +206,16 @@ class NS_OT_no_shortcut(bpy.types.Operator):
                 draw_keys('R_SHIFT.png')
             return {'RUNNING_MODAL'}
         
+        if event.type == 'T':
+            draw_keys("T.png")
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'Y':
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'U':
+            return {'RUNNING_MODAL'}
+        
         if event.type == 'A':
             draw_keys("A.png")
             return {'RUNNING_MODAL'}
