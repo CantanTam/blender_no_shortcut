@@ -48,34 +48,124 @@ class NS_OT_no_shortcut(bpy.types.Operator):
         return {'RUNNING_MODAL'}
 
     def modal(self, context, event):
-        if event.type == 'ACCENT_GRAVE' and event.alt == True and event.value == 'RELEASE':
-            context.scene.shortcut_mode.mode = not context.scene.shortcut_mode.mode
-            context.scene.update_tag()
+        typeandmode = bpy.context.active_object.type+bpy.context.active_object.mode
+        
+        if event.type =='F1':
+            draw_keys("F1.png")
             return {'RUNNING_MODAL'}
+        
+        if event.type == 'F2':
+            draw_keys('F2.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'F3':
+            draw_keys('F3.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'F4':
+            draw_keys('F4.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'F9':
+            draw_keys('F9.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'F11':
+            draw_keys('F11.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'F12':
+            draw_keys('F12.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type in {'F5','F6','F7','F8','F10'}:
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'ACCENT_GRAVE':
+            draw_keys('`.png')
+            if event.ctrl == True:
+                draw_keys('`_CTRL.png')
+            if event.shift == True:
+                draw_keys('`_SHIFT.png')
+            
+            return {'RUNNING_MODAL'}
+        
+            #and event.alt == True and event.value == 'RELEASE':
+            #context.scene.shortcut_mode.mode = not context.scene.shortcut_mode.mode
+            #context.scene.update_tag()
+            #return {'RUNNING_MODAL'}
 
-        if event.type == 'ESC':
-            bpy.ops.object.mode_set(mode=current_mode)
-            bpy.types.SpaceView3D.draw_handler_remove(self.handle_backgroud, 'WINDOW')
-            bpy.types.SpaceView3D.draw_handler_remove(self.handle_key_shader, 'WINDOW')
-
-            # 清理残留图片纹理
-            if bottom_keys.bottom_key:
-                bottom_keys.bottom_key.cleanup()
-                bottom_keys.bottom_key = None
-
-            # 清理残留图片纹理
-            if top_keys.top_key:
-                top_keys.top_key.cleanup()
-                top_keys.top_key = None
-
-            if keys_shader.keys_shader_texture:
-                # 4.0 以上版本，无需要手动 free()
-                if bpy.app.version < (4, 0, 0):
-                    keys_shader.keys_shader_texture.free()
-                keys_shader.keys_shader_texture = None
-
-            bpy.ops.wm.window_close()
-            return {'FINISHED'}
+        if event.type == 'ONE':
+            draw_keys('1.png')
+            if event.shift == True:
+                draw_keys('1_SHIFT.png')
+            if event.ctrl == True:
+                draw_keys('1_CTRL.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'TWO':
+            draw_keys('2.png')
+            if event.shift == True:
+                draw_keys('2_SHIFT.png')
+            if event.ctrl == True:
+                draw_keys('2_CTRL.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'THREE':
+            draw_keys('3.png')
+            if event.shift == True:
+                draw_keys('3_SHIFT.png')
+            if event.ctrl == True:
+                draw_keys('3_CTRL.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'FOUR':
+            draw_keys('4.png')
+            if event.shift == True:
+                draw_keys('4_SHIFT.png')
+            if event.ctrl == True:
+                draw_keys('4_CTRL.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'FIVE':
+            draw_keys('5.png')
+            if event.shift == True:
+                draw_keys('5_SHIFT.png')
+            if event.ctrl == True:
+                draw_keys('5_CTRL.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'SIX':
+            draw_keys('6.png')
+            if event.shift == True:
+                draw_keys('6_SHIFT.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'SEVEN':
+            draw_keys('7.png')
+            if event.shift == True:
+                draw_keys('7_SHIFT.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'EIGHT':
+            draw_keys('8.png')
+            if event.shift == True:
+                draw_keys('8_SHIFT.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'NINE':
+            draw_keys('9.png')
+            if event.shift == True:
+                draw_keys('9_SHIFT.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'ZERO':
+            draw_keys('0.png')
+            if event.shift == True:
+                draw_keys('0_SHIFT.png')
+            if event.ctrl == True:
+                draw_keys('0_CTRL.png')
+            return {'RUNNING_MODAL'}
 
         if event.type == 'ACCENT_GRAVE':
             return {'RUNNING_MODAL'}
@@ -101,6 +191,30 @@ class NS_OT_no_shortcut(bpy.types.Operator):
         
         if event.type == 'CAPSLOCK':
             return {'PASS_THROUGH'}
+        
+        if event.type == 'ESC':
+            bpy.ops.object.mode_set(mode=current_mode)
+            bpy.types.SpaceView3D.draw_handler_remove(self.handle_backgroud, 'WINDOW')
+            bpy.types.SpaceView3D.draw_handler_remove(self.handle_key_shader, 'WINDOW')
+
+            # 清理残留图片纹理
+            if bottom_keys.bottom_key:
+                bottom_keys.bottom_key.cleanup()
+                bottom_keys.bottom_key = None
+
+            # 清理残留图片纹理
+            if top_keys.top_key:
+                top_keys.top_key.cleanup()
+                top_keys.top_key = None
+
+            if keys_shader.keys_shader_texture:
+                # 4.0 以上版本，无需要手动 free()
+                if bpy.app.version < (4, 0, 0):
+                    keys_shader.keys_shader_texture.free()
+                keys_shader.keys_shader_texture = None
+
+            bpy.ops.wm.window_close()
+            return {'FINISHED'}
             
 
         return {'PASS_THROUGH'}
