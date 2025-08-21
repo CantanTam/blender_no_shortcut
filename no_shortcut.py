@@ -167,11 +167,43 @@ class NS_OT_no_shortcut(bpy.types.Operator):
                 draw_keys('0_CTRL.png')
             return {'RUNNING_MODAL'}
 
-        if event.type == 'ACCENT_GRAVE':
+        if event.type == 'MINUS':
+            draw_keys('MINUS_CTRL.png')
             return {'RUNNING_MODAL'}
         
-        if event.type == 'E' or event.type == 'E' and event.alt == True:
-            draw_keys("E.png")
+        if event.type == 'EQUAL':
+            draw_keys('EQUAL_CTRL.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'TAB':
+            draw_keys('TAB.png')
+            if event.ctrl == True:
+                draw_keys('TAB_CTRL.png')
+            if event.shift == True:
+                draw_keys('TAB_SHIFT.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'Q':
+            draw_keys('Q.png')
+            if event.ctrl == True:
+                draw_keys('Q_CTRL.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'W':
+            draw_keys('W.png')
+            if event.alt == True:
+                draw_keys('W_ALT.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'E':
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'R':
+            draw_keys('R.png')
+            if event.alt == True:
+                draw_keys('R_ALT.png')
+            if event.shift == True:
+                draw_keys('R_SHIFT.png')
             return {'RUNNING_MODAL'}
         
         if event.type == 'A':
