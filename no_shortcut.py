@@ -83,9 +83,9 @@ class NS_OT_no_shortcut(bpy.types.Operator):
         
         if event.type == 'ACCENT_GRAVE':
             draw_keys('`.png')
-            if event.ctrl == True:
+            if event.ctrl :
                 draw_keys('`_CTRL.png')
-            if event.shift == True:
+            if event.shift :
                 draw_keys('`_SHIFT.png')
             
             return {'RUNNING_MODAL'}
@@ -97,73 +97,73 @@ class NS_OT_no_shortcut(bpy.types.Operator):
 
         if event.type == 'ONE':
             draw_keys('1.png')
-            if event.shift == True:
+            if event.shift :
                 draw_keys('1_SHIFT.png')
-            if event.ctrl == True:
+            if event.ctrl :
                 draw_keys('1_CTRL.png')
             return {'RUNNING_MODAL'}
         
         if event.type == 'TWO':
             draw_keys('2.png')
-            if event.shift == True:
+            if event.shift :
                 draw_keys('2_SHIFT.png')
-            if event.ctrl == True:
+            if event.ctrl :
                 draw_keys('2_CTRL.png')
             return {'RUNNING_MODAL'}
         
         if event.type == 'THREE':
             draw_keys('3.png')
-            if event.shift == True:
+            if event.shift :
                 draw_keys('3_SHIFT.png')
-            if event.ctrl == True:
+            if event.ctrl :
                 draw_keys('3_CTRL.png')
             return {'RUNNING_MODAL'}
         
         if event.type == 'FOUR':
             draw_keys('4.png')
-            if event.shift == True:
+            if event.shift :
                 draw_keys('4_SHIFT.png')
-            if event.ctrl == True:
+            if event.ctrl :
                 draw_keys('4_CTRL.png')
             return {'RUNNING_MODAL'}
         
         if event.type == 'FIVE':
             draw_keys('5.png')
-            if event.shift == True:
+            if event.shift :
                 draw_keys('5_SHIFT.png')
-            if event.ctrl == True:
+            if event.ctrl :
                 draw_keys('5_CTRL.png')
             return {'RUNNING_MODAL'}
         
         if event.type == 'SIX':
             draw_keys('6.png')
-            if event.shift == True:
+            if event.shift :
                 draw_keys('6_SHIFT.png')
             return {'RUNNING_MODAL'}
         
         if event.type == 'SEVEN':
             draw_keys('7.png')
-            if event.shift == True:
+            if event.shift :
                 draw_keys('7_SHIFT.png')
             return {'RUNNING_MODAL'}
         
         if event.type == 'EIGHT':
             draw_keys('8.png')
-            if event.shift == True:
+            if event.shift :
                 draw_keys('8_SHIFT.png')
             return {'RUNNING_MODAL'}
         
         if event.type == 'NINE':
             draw_keys('9.png')
-            if event.shift == True:
+            if event.shift :
                 draw_keys('9_SHIFT.png')
             return {'RUNNING_MODAL'}
         
         if event.type == 'ZERO':
             draw_keys('0.png')
-            if event.shift == True:
+            if event.shift :
                 draw_keys('0_SHIFT.png')
-            if event.ctrl == True:
+            if event.ctrl :
                 draw_keys('0_CTRL.png')
             return {'RUNNING_MODAL'}
 
@@ -177,21 +177,21 @@ class NS_OT_no_shortcut(bpy.types.Operator):
         
         if event.type == 'TAB':
             draw_keys('TAB.png')
-            if event.ctrl == True:
+            if event.ctrl :
                 draw_keys('TAB_CTRL.png')
-            if event.shift == True:
+            if event.shift :
                 draw_keys('TAB_SHIFT.png')
             return {'RUNNING_MODAL'}
         
         if event.type == 'Q':
             draw_keys('Q.png')
-            if event.ctrl == True:
+            if event.ctrl :
                 draw_keys('Q_CTRL.png')
             return {'RUNNING_MODAL'}
         
         if event.type == 'W':
             draw_keys('W.png')
-            if event.alt == True:
+            if event.alt :
                 draw_keys('W_ALT.png')
             return {'RUNNING_MODAL'}
         
@@ -200,9 +200,9 @@ class NS_OT_no_shortcut(bpy.types.Operator):
         
         if event.type == 'R':
             draw_keys('R.png')
-            if event.alt == True:
+            if event.alt :
                 draw_keys('R_ALT.png')
-            if event.shift == True:
+            if event.shift :
                 draw_keys('R_SHIFT.png')
             return {'RUNNING_MODAL'}
         
@@ -214,6 +214,58 @@ class NS_OT_no_shortcut(bpy.types.Operator):
             return {'RUNNING_MODAL'}
         
         if event.type == 'U':
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'I':
+            draw_keys('I.png')
+            if event.alt :
+                draw_keys('I_ALT.png')
+            if event.ctrl :
+                draw_keys('I_CTRL.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'O':
+            draw_keys('O.png')
+            if event.shift:
+                draw_keys('O_SHIFT.png')
+            if event.ctrl:
+                draw_keys('O_CTRL.png')
+            if event.ctrl and event.shift:
+                draw_keys('O_CTRL_SHIFT.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'P':
+            draw_keys('P.png')
+            if event.ctrl:
+                draw_keys('P_CTRL.png')
+            if event.alt:
+                draw_keys('P_ALT.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'A':
+            draw_keys('A.png')
+            if event.alt:
+                draw_keys('A_ALT.png')
+            if event.ctrl:
+                draw_keys('A_CTRL.png')
+            if event.shift:
+                draw_keys('A_SHIFT.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'S':
+            draw_keys('S.png')
+            if event.alt:
+                draw_keys('S_ALT.png')
+            if event.shift:
+                draw_keys('S_SHIFT.png')
+            if event.ctrl:
+                draw_keys('S_CTRL.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'D':
+            draw_keys('D.png')
+            if event.alt or event.shift:
+                draw_keys('D_SHIFT_ALT.png')
             return {'RUNNING_MODAL'}
         
         if event.type == 'A':
