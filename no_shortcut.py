@@ -262,6 +262,12 @@ class NS_OT_no_shortcut(bpy.types.Operator):
                 draw_keys('S_CTRL.png')
             return {'RUNNING_MODAL'}
         
+        if event.type == 'D':
+            draw_keys('D.png')
+            if event.alt or event.shift:
+                draw_keys('D_SHIFT_ALT.png')
+            return {'RUNNING_MODAL'}
+        
         if event.type == 'F':
             return {'RUNNING_MODAL'}
         
@@ -283,11 +289,70 @@ class NS_OT_no_shortcut(bpy.types.Operator):
                 draw_keys('G_CTRL_SHIFT_ALT.png')
             return {'RUNNING_MODAL'}
         
-        if event.type == 'D':
-            draw_keys('D.png')
-            if event.alt or event.shift:
-                draw_keys('D_SHIFT_ALT.png')
+        if event.type == 'H':
+            draw_keys('H.png')
+            if event.ctrl:
+                draw_keys('H_CTRL.png')
+            if event.shift:
+                draw_keys('H_SHIFT.png')
+            if event.alt:
+                draw_keys('H_ALT.png')
             return {'RUNNING_MODAL'}
+        
+        if event.type == 'J':
+            draw_keys('J.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'K':
+            draw_keys('K.png')
+            if event.shift:
+                draw_keys('K_SHIFT.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'L':
+            draw_keys('L.png')
+            if event.shift:
+                draw_keys('L_SHIFT.png')
+            if event.ctrl:
+                draw_keys('L_CTRL.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'Z':
+            draw_keys('Z.png')
+            if event.ctrl:
+                draw_keys('Z_CTRL.png')
+            if event.shift:
+                draw_keys('Z_SHIFT.png')
+            if event.alt:
+                draw_keys('Z_ALT.png')
+            if event.ctrl and event.shift:
+                draw_keys('Z_CTRL_SHIFT.png')
+            if event.shift and event.alt:
+                draw_keys('Z_SHIFT_ALT.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'X':
+            draw_keys('X.png')
+            if event.shift:
+                draw_keys('X_SHIFT.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'C':
+            draw_keys('C.png')
+            if event.ctrl:
+                draw_keys('C_CTRL.png')
+            if event.shift:
+                draw_keys('C_SHIFT.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'V':
+            draw_keys('V.png')
+            return {'RUNNING_MODAL'}
+        
+        
+
+        
+
         
         if event.type == 'A':
             draw_keys("A.png")
