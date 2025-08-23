@@ -262,6 +262,27 @@ class NS_OT_no_shortcut(bpy.types.Operator):
                 draw_keys('S_CTRL.png')
             return {'RUNNING_MODAL'}
         
+        if event.type == 'F':
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'G':
+            draw_keys('G.png')
+            if event.alt:
+                draw_keys('G_ALT.png')
+            if event.ctrl:
+                draw_keys('G_CTRL.png')
+            if event.shift:
+                draw_keys('G_SHIFT.png')
+            if event.shift and event.alt:
+                draw_keys('G_SHIFT_ALT.png')
+            if event.ctrl and event.alt:
+                draw_keys('G_CTRL_ALT.png')
+            if event.ctrl and event.shift:
+                draw_keys('G_CTRL_SHIFT.png')
+            if event.ctrl and event.shift and event.alt:
+                draw_keys('G_CTRL_SHIFT_ALT.png')
+            return {'RUNNING_MODAL'}
+        
         if event.type == 'D':
             draw_keys('D.png')
             if event.alt or event.shift:
