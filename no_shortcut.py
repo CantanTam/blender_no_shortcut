@@ -187,6 +187,8 @@ class NS_OT_no_shortcut(bpy.types.Operator):
             draw_keys('Q.png')
             if event.ctrl :
                 draw_keys('Q_CTRL.png')
+            if event.ctrl and event.alt:
+                draw_keys('Q_CTRL_ALT.png')
             return {'RUNNING_MODAL'}
         
         if event.type == 'W':
@@ -392,6 +394,47 @@ class NS_OT_no_shortcut(bpy.types.Operator):
             if event.alt:
                 draw_keys('SLASH_ALT.png')
             return {'RUNNING_MODAL'}
+        
+        if event.type == 'SPACE':
+            draw_keys('SPACE.png')
+            if event.ctrl:
+                draw_keys('SPACE_CTRL.png')
+            if event.shift:
+                draw_keys('SPACE_SHIFT.png')
+            if event.ctrl and event.shift:
+                draw_keys('SPACE_CTRL_SHIFT.png')
+            if event.ctrl and event.alt:
+                draw_keys('SPACE_CTRL_ALT.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'HOME':
+            draw_keys('HOME.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'DEL':
+            draw_keys('DELETE.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'UP_ARROW':
+            draw_keys('UP.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'DOWN_ARROW':
+            draw_keys('DOWN.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'LEFT_ARROW':
+            draw_keys('LEFT.png')
+            if event.shift:
+                draw_keys('LEFT_SHIFT.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'RIGHT_ARROW':
+            draw_keys('RIGHT.png')
+            if event.shift:
+                draw_keys('RIGHT_SHIFT.png')
+            return {'RUNNING_MODAL'}
+        
         
 
         
