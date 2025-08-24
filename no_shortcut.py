@@ -349,25 +349,55 @@ class NS_OT_no_shortcut(bpy.types.Operator):
             draw_keys('V.png')
             return {'RUNNING_MODAL'}
         
+        if event.type == 'B':
+            draw_keys('B.png')
+            if event.shift:
+                draw_keys('B_SHIFT.png')
+            if event.alt:
+                draw_keys('B_ALT.png')
+            if event.ctrl or event.ctrl and event.alt:
+                draw_keys('B_CTRL_ALT.png')
+            if event.ctrl and event.shift:
+                draw_keys('B_CTRL_SHIFT.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'N':
+            draw_keys('N.png')
+            if event.ctrl:
+                draw_keys('N_CTRL.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'M':
+            draw_keys('M.png')
+            if event.ctrl:
+                draw_keys('M_CTRL.png')
+            if event.shift:
+                draw_keys('M_SHIFT.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'COMMA':
+            draw_keys('COMMA.png')
+            if event.ctrl:
+                draw_keys('COMMA_CTRL.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'PERIOD':
+            draw_keys('PERIOD.png')
+            if event.ctrl:
+                draw_keys('PERIOD_CTRL.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'SLASH':
+            draw_keys('SLASH.png')
+            if event.alt:
+                draw_keys('SLASH_ALT.png')
+            return {'RUNNING_MODAL'}
         
 
         
 
         
-        if event.type == 'A':
-            draw_keys("A.png")
-            return {'RUNNING_MODAL'}
-        
-        if event.type == 'H':
-            draw_keys("A.png")
-            return {'RUNNING_MODAL'}
-        
-        if event.type == 'Q':
-            if bpy.context.scene.shortcut_mode.mode:
-                draw_keys("BLUE.png")
-            else:
-                draw_keys("RED.png")
-            return {'RUNNING_MODAL'}
+
         
         if event.type == 'CAPSLOCK':
             return {'PASS_THROUGH'}
