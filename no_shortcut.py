@@ -435,6 +435,32 @@ class NS_OT_no_shortcut(bpy.types.Operator):
                 draw_keys('RIGHT_SHIFT.png')
             return {'RUNNING_MODAL'}
         
+        if event.type == 'NUMPAD_SLASH':
+            draw_keys('NUM_SLASH.png')
+            if event.alt:
+                draw_keys('NUM_SLASH_ALT.png')
+            if event.ctrl or event.shift:
+                draw_keys('NUM_SLASH_CTRL_SHIFT.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'NUMPAD_ASTERIX':
+            draw_keys('NUM_ASTERIX.png')
+            if event.ctrl or event.shift:
+                draw_keys('NUM_ASTERIX_CTRL_SHIFT.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'NUMPAD_MINUS':
+            draw_keys('NUM_MINUS.png')
+            if event.ctrl or event.shift:
+                draw_keys('NUM_MINUS_CTRL_SHIFT.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'NUMPAD_PLUS':
+            draw_keys('NUM_PLUS.png')
+            if event.ctrl or event.shift:
+                draw_keys('NUM_PLUS_CTRL_SHIFT.png')
+            return {'RUNNING_MODAL'}
+        
         
 
         
