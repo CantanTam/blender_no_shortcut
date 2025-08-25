@@ -461,11 +461,53 @@ class NS_OT_no_shortcut(bpy.types.Operator):
                 draw_keys('NUM_PLUS_CTRL_SHIFT.png')
             return {'RUNNING_MODAL'}
         
+        if event.type == 'NUMPAD_7':
+            draw_keys('NUM_7.png')
+            return {'RUNNING_MODAL'}
         
+        if event.type == 'NUMPAD_1':
+            draw_keys('NUM_1.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'NUMPAD_3':
+            draw_keys('NUM_3.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'NUMPAD_9':
+            draw_keys('NUM_9.png')
+            return {'RUNNING_MODAL'}
 
+        if event.type == 'NUMPAD_5':
+            draw_keys('NUM_5.png')
+            return {'RUNNING_MODAL'}
         
+        if event.type == 'NUMPAD_4':
+            draw_keys('NUM_4.png')
+            if event.ctrl:
+                draw_keys('NUM_4_CTRL.png')
+            if event.shift:
+                draw_keys('NUM_4_SHIFT.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'NUMPAD_6':
+            draw_keys('NUM_6.png')
+            if event.ctrl:
+                draw_keys('NUM_6_CTRL.png')
+            if event.shift:
+                draw_keys('NUM_6_SHIFT.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'NUMPAD_8':
+            draw_keys('NUM_8.png')
+            if event.ctrl:
+                draw_keys('NUM_8_CTRL.png')
+            return {'RUNNING_MODAL'}
 
-        
+        if event.type == 'NUMPAD_2':
+            draw_keys('NUM_2.png')
+            if event.ctrl:
+                draw_keys('NUM_2_CTRL.png')
+            return {'RUNNING_MODAL'}
 
         
         if event.type == 'CAPSLOCK':
