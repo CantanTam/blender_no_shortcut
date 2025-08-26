@@ -104,7 +104,7 @@ def draw_keys(image_name):
         bpy.app.timers.register(lambda: None, first_interval=0.1)
     
     bottom_key = DrawBottomKey(image_name)
-    draw_keyboard("KEYBOARD.png")
+    draw_keyboard("KEYBOARD_OBJECT.png")
     return bottom_key
 
 def register():

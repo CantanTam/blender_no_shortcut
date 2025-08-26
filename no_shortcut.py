@@ -41,7 +41,8 @@ class NS_OT_no_shortcut(bpy.types.Operator):
         
         self.handle_backgroud = bpy.types.SpaceView3D.draw_handler_add(draw_background, (self,context), 'WINDOW', 'POST_PIXEL')
         self.handle_key_shader = bpy.types.SpaceView3D.draw_handler_add(keys_shader.draw_keys_shader, (self,context), 'WINDOW', 'POST_PIXEL')
-        draw_keyboard("KEYBOARD.png")
+        #draw_keyboard("KEYBOARD_OBJECT.png")
+        draw_keys('TEST.png')
 
 
         context.window_manager.modal_handler_add(self)
@@ -82,11 +83,11 @@ class NS_OT_no_shortcut(bpy.types.Operator):
             return {'RUNNING_MODAL'}
         
         if event.type == 'ACCENT_GRAVE':
-            draw_keys('`.png')
+            draw_keys('ACCENT_GRAVE.png')
             if event.ctrl :
-                draw_keys('`_CTRL.png')
+                draw_keys('ACCENT_GRAVE_CTRL.png')
             if event.shift :
-                draw_keys('`_SHIFT.png')
+                draw_keys('ACCENT_GRAVE_SHIFT.png')
             
             return {'RUNNING_MODAL'}
         
@@ -445,8 +446,6 @@ class NS_OT_no_shortcut(bpy.types.Operator):
         
         if event.type == 'NUMPAD_ASTERIX':
             draw_keys('NUM_ASTERIX.png')
-            if event.ctrl or event.shift:
-                draw_keys('NUM_ASTERIX_CTRL_SHIFT.png')
             return {'RUNNING_MODAL'}
         
         if event.type == 'NUMPAD_MINUS':
@@ -507,6 +506,18 @@ class NS_OT_no_shortcut(bpy.types.Operator):
             draw_keys('NUM_2.png')
             if event.ctrl:
                 draw_keys('NUM_2_CTRL.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'NUMPAD_0':
+            draw_keys('NUM_0.png')
+            if event.ctrl:
+                draw_keys('NUM_0_CTRL.png')
+            if event.ctrl and event.alt:
+                draw_keys('NUM_0_CTRL_ALT.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'NUMPAD_PERIOD':
+            draw_keys('NUM_PERIOD.png')
             return {'RUNNING_MODAL'}
 
         
