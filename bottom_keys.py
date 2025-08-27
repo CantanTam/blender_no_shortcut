@@ -3,6 +3,7 @@ from gpu_extras.batch import batch_for_shader
 from . import width_height
 from .top_keys import draw_keyboard
 
+mouse_click = None
 
 class DrawBottomKey:
     def __init__(self, image_path):
@@ -97,14 +98,18 @@ class DrawBottomKey:
 bottom_key = None
 
 def draw_keys(image_name):
-    global bottom_key
+    global bottom_key,mouse_click
     if bottom_key:
         bottom_key.cleanup()
         bottom_key = None
         bpy.app.timers.register(lambda: None, first_interval=0.1)
     
     bottom_key = DrawBottomKey(image_name)
-    draw_keyboard("KEYBOARD_OBJECT.png")
+    if mouse_click:
+        draw_keyboard("KEYBOARD_OBJECT_MAIN.png")
+        mouse_click = False
+    else:
+        draw_keyboard("KEYBOARD_OBJECT.png")
     return bottom_key
 
 def register():

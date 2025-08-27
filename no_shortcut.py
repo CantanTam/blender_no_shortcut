@@ -2,7 +2,7 @@ import bpy
 from .background import draw_background
 from .bottom_keys import draw_keys
 from . import bottom_keys
-from .top_keys import draw_keyboard
+#from .top_keys import draw_keyboard
 from . import top_keys
 #from .draw_keys_shader import draw_keys_shader
 from . import keys_shader
@@ -19,11 +19,13 @@ class NS_OT_no_shortcut(bpy.types.Operator):
     bl_idname = "wm.no_shortcut"
     bl_label = "快捷键提示"
     bl_description = "快捷键提示"
-    bl_options = {'REGISTER', 'UNDO'} 
+    bl_options = {'REGISTER', 'UNDO'}
 
     @classmethod
     def poll(cls, context):
-        return context.active_object
+        return context.mode == 'OBJECT' or context.active_object.type+context.active_object.mode in {
+            'MESHEDIT'
+            }
 
     def invoke(self, context, event):
         global current_type,current_mode
@@ -49,6 +51,8 @@ class NS_OT_no_shortcut(bpy.types.Operator):
         return {'RUNNING_MODAL'}
 
     def modal(self, context, event):
+        global mouse_click
+
         typeandmode = bpy.context.active_object.type+bpy.context.active_object.mode
         
         if event.type =='F1':
@@ -518,6 +522,51 @@ class NS_OT_no_shortcut(bpy.types.Operator):
         
         if event.type == 'NUMPAD_PERIOD':
             draw_keys('NUM_PERIOD.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'MIDDLEMOUSE':
+            bottom_keys.mouse_click = True
+            draw_keys('MOUSE_MIDDLE.png')
+            if event.ctrl:
+                bottom_keys.mouse_click = True
+                draw_keys('MOUSE_MIDDLE_CTRL.png')
+            if event.shift:
+                bottom_keys.mouse_click = True
+                draw_keys('MOUSE_MIDDLE_SHIFT.png')
+            if event.alt:
+                bottom_keys.mouse_click = True
+                draw_keys('MOUSE_MIDDLE_ALT.png')
+            if event.ctrl and event.shift:
+                bottom_keys.mouse_click = True
+                draw_keys('MOUSE_MIDDLE_CTRL_SHIFT.png')
+            return {'RUNNING_MODAL'}
+
+        if event.type in {'WHEELUPMOUSE','WHEELDOWNMOUSE'}:
+            bottom_keys.mouse_click = True
+            draw_keys('MOUSE_MIDDLE_UP_DOWN.png')
+            if event.alt:
+                bottom_keys.mouse_click = True
+                draw_keys('MOUSE_MIDDLE_UP_DOWN_ALT.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'LEFTMOUSE':
+            bottom_keys.mouse_click = True
+            draw_keys('MOUSE_LEFT.png')
+            return {'RUNNING_MODAL'}
+        
+        if event.type == 'RIGHTMOUSE':
+            bottom_keys.mouse_click = True
+            draw_keys('MOUSE_RIGHT.png')
+            if event.ctrl:
+                bottom_keys.mouse_click = True
+                draw_keys('MOUSE_RIGHT_CTRL.png')
+            if event.shift:
+                bottom_keys.mouse_click = True
+                draw_keys('MOUSE_RIGHT_SHIFT.png')
+            return {'RUNNING_MODAL'}
+        
+        # 鼠标移动直接 回到 modal
+        if event.type == 'MOUSEMOVE':
             return {'RUNNING_MODAL'}
 
         
