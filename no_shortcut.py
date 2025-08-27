@@ -15,6 +15,8 @@ def close_gizmo_overlay():
 current_type = None
 current_mode = None
 
+context_mode = None
+
 class NS_OT_no_shortcut(bpy.types.Operator):
     bl_idname = "wm.no_shortcut"
     bl_label = "快捷键提示"
@@ -23,12 +25,13 @@ class NS_OT_no_shortcut(bpy.types.Operator):
 
     @classmethod
     def poll(cls, context):
-        return context.mode == 'OBJECT' or context.active_object.type+context.active_object.mode in {
-            'MESHEDIT'
-            }
+        return context.mode in {'OBJECT','EDIT_MESH'}
 
     def invoke(self, context, event):
-        global current_type,current_mode
+        global current_type,current_mode,context_mode
+
+        context_mode = context.mode
+        bottom_keys.bottom_context_mode = context.mode
 
         current_type = context.active_object.type
         current_mode = context.active_object.mode
@@ -50,11 +53,7 @@ class NS_OT_no_shortcut(bpy.types.Operator):
         context.window_manager.modal_handler_add(self)
         return {'RUNNING_MODAL'}
 
-    def modal(self, context, event):
-        global mouse_click
-
-        typeandmode = bpy.context.active_object.type+bpy.context.active_object.mode
-        
+    def modal(self, context, event):        
         if event.type =='F1':
             draw_keys("F1.png")
             return {'RUNNING_MODAL'}
@@ -101,11 +100,14 @@ class NS_OT_no_shortcut(bpy.types.Operator):
             #return {'RUNNING_MODAL'}
 
         if event.type == 'ONE':
-            draw_keys('1.png')
-            if event.shift :
-                draw_keys('1_SHIFT.png')
-            if event.ctrl :
-                draw_keys('1_CTRL.png')
+            if context_mode == 'OBJECT':
+                draw_keys('1.png')
+                if event.shift :
+                    draw_keys('1_SHIFT.png')
+                if event.ctrl :
+                    draw_keys('1_CTRL.png')
+            elif context_mode == 'EDIT_MESH':
+                draw_keys('1_2_3_EDIT.png')
             return {'RUNNING_MODAL'}
         
         if event.type == 'TWO':
@@ -186,6 +188,8 @@ class NS_OT_no_shortcut(bpy.types.Operator):
                 draw_keys('TAB_CTRL.png')
             if event.shift :
                 draw_keys('TAB_SHIFT.png')
+            if event.ctrl and event.shift:
+                draw_keys('TAB_CTRL_SHIFT.png')
             return {'RUNNING_MODAL'}
         
         if event.type == 'Q':

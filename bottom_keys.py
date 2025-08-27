@@ -4,6 +4,7 @@ from . import width_height
 from .top_keys import draw_keyboard
 
 mouse_click = None
+bottom_context_mode = None
 
 class DrawBottomKey:
     def __init__(self, image_path):
@@ -98,7 +99,7 @@ class DrawBottomKey:
 bottom_key = None
 
 def draw_keys(image_name):
-    global bottom_key,mouse_click
+    global bottom_key,mouse_click,bottom_context_mode
     if bottom_key:
         bottom_key.cleanup()
         bottom_key = None
@@ -106,10 +107,16 @@ def draw_keys(image_name):
     
     bottom_key = DrawBottomKey(image_name)
     if mouse_click:
-        draw_keyboard("KEYBOARD_OBJECT_MAIN.png")
+        if bottom_context_mode == 'OBJECT':
+            draw_keyboard("KEYBOARD_OBJECT_MAIN.png")
+        elif bottom_context_mode == 'EDIT_MESH':
+            draw_keyboard("KEYBOARD_EDIT_MAIN.png")
         mouse_click = False
     else:
-        draw_keyboard("KEYBOARD_OBJECT.png")
+        if bottom_context_mode == 'OBJECT':
+            draw_keyboard("KEYBOARD_OBJECT.png")
+        elif bottom_context_mode == 'EDIT_MESH':
+            draw_keyboard("KEYBOARD_EDIT.png")
     return bottom_key
 
 def register():
