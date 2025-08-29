@@ -368,22 +368,49 @@ class NS_OT_no_shortcut(bpy.types.Operator):
             return {'RUNNING_MODAL'}
         
         if event.type == 'S':
-            draw_keys('S.png')
-            if event.alt:
-                draw_keys('S_ALT.png')
-            if event.shift:
-                draw_keys('S_SHIFT.png')
-            if event.ctrl:
-                draw_keys('S_CTRL.png')
+            if context_mode == 'OBJECT':
+                draw_keys('S.png')
+                if event.alt:
+                    draw_keys('S_ALT.png')
+                if event.shift:
+                    draw_keys('S_SHIFT.png')
+                if event.ctrl:
+                    draw_keys('S_CTRL.png')
+
+            if context_mode == 'EDIT_MESH':
+                draw_keys('S_EDIT.png')
+                if event.ctrl:
+                    draw_keys('S_CTRL_EDIT.png')
+                if event.shift:
+                    draw_keys('S_SHIFT_EDIT.png')
+                if event.alt:
+                    draw_keys('S_ALT_EDIT.png')
+                if event.shift and event.alt:
+                    draw_keys('S_SHIFT_ALT_EDIT.png')
+                if event.ctrl and event.shift and event.alt:
+                    draw_keys('S_CTRL_SHIFT_ALT_EDIT.png')
             return {'RUNNING_MODAL'}
         
         if event.type == 'D':
-            draw_keys('D.png')
-            if event.alt or event.shift:
-                draw_keys('D_SHIFT_ALT.png')
+            if context_mode == 'OBJECT':
+                draw_keys('D.png')
+                if event.alt or event.shift:
+                    draw_keys('D_SHIFT_AND_ALT.png')
+            if context_mode == 'EDIT_MESH':
+                draw_keys('D_EDIT.png')
+                if event.shift:
+                    draw_keys('D_SHIFT_EDIT.png')
+                if event.alt:
+                    draw_keys('D_ALT_EDIT.png')
             return {'RUNNING_MODAL'}
         
         if event.type == 'F':
+            if context_mode == 'EDIT_MESH':
+                draw_keys('F_EDIT.png')
+                if event.ctrl:
+                    draw_keys('F_CTRL_EDIT.png')
+                if event.alt:
+                    draw_keys('F_ALT_EDIT.png')
             return {'RUNNING_MODAL'}
         
         if event.type == 'G':
