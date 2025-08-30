@@ -25,7 +25,7 @@ class NS_OT_no_shortcut(bpy.types.Operator):
 
     @classmethod
     def poll(cls, context):
-        return context.mode in {'OBJECT','EDIT_MESH'}
+        return context.active_object and context.mode in {'OBJECT','EDIT_MESH'}
 
     def invoke(self, context, event):
         global current_type,current_mode,context_mode
@@ -442,13 +442,23 @@ class NS_OT_no_shortcut(bpy.types.Operator):
             return {'RUNNING_MODAL'}
         
         if event.type == 'H':
-            draw_keys('H.png')
-            if event.ctrl:
-                draw_keys('H_CTRL.png')
-            if event.shift:
-                draw_keys('H_SHIFT.png')
-            if event.alt:
-                draw_keys('H_ALT.png')
+            if context_mode == 'OBJECT':
+                draw_keys('H.png')
+                if event.ctrl:
+                    draw_keys('H_CTRL.png')
+                if event.shift:
+                    draw_keys('H_SHIFT.png')
+                if event.alt:
+                    draw_keys('H_ALT.png')
+
+            if context_mode == 'EDIT_MESH':
+                draw_keys('H_EDIT.png')
+                if event.ctrl:
+                    draw_keys('H_CTRL_EDIT.png')
+                if event.shift:
+                    draw_keys('H_SHIFT_EDIT.png')
+                if event.alt:
+                    draw_keys('H_ALT_EDIT.png')
             return {'RUNNING_MODAL'}
         
         if event.type == 'J':
