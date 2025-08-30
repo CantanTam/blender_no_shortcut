@@ -414,21 +414,31 @@ class NS_OT_no_shortcut(bpy.types.Operator):
             return {'RUNNING_MODAL'}
         
         if event.type == 'G':
-            draw_keys('G.png')
-            if event.alt:
-                draw_keys('G_ALT.png')
-            if event.ctrl:
-                draw_keys('G_CTRL.png')
-            if event.shift:
-                draw_keys('G_SHIFT.png')
-            if event.shift and event.alt:
-                draw_keys('G_SHIFT_ALT.png')
-            if event.ctrl and event.alt:
-                draw_keys('G_CTRL_ALT.png')
-            if event.ctrl and event.shift:
-                draw_keys('G_CTRL_SHIFT.png')
-            if event.ctrl and event.shift and event.alt:
-                draw_keys('G_CTRL_SHIFT_ALT.png')
+            if context_mode == 'OBJECT':
+                draw_keys('G.png')
+                if event.ctrl:
+                    draw_keys('G_CTRL.png')
+                if event.shift:
+                    draw_keys('G_SHIFT.png')
+                if event.alt:
+                    draw_keys('G_ALT.png')
+                if event.ctrl and event.shift:
+                    draw_keys('G_CTRL_SHIFT.png')
+                if event.ctrl and event.alt:
+                    draw_keys('G_CTRL_ALT.png')
+                if event.shift and event.alt:
+                    draw_keys('G_SHIFT_ALT.png')
+                if event.ctrl and event.shift and event.alt:
+                    draw_keys('G_CTRL_SHIFT_ALT.png')
+
+            if context_mode == 'EDIT_MESH':
+                draw_keys('G_EDIT.png')
+                if event.shift:
+                    draw_keys('G_SHIFT_EDIT.png')
+                if event.ctrl:
+                    draw_keys('G_CTRL_EDIT.png')
+                if event.ctrl and event.alt:
+                    draw_keys('G_CTRL_ALT_EDIT.png')
             return {'RUNNING_MODAL'}
         
         if event.type == 'H':
