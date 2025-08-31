@@ -547,33 +547,75 @@ class NS_OT_no_shortcut(bpy.types.Operator):
             return {'RUNNING_MODAL'}
         
         if event.type == 'V':
-            draw_keys('V.png')
+            if context_mode == 'OBJECT':
+                draw_keys('V.png')
+
+            if context_mode == 'EDIT_MESH':
+                draw_keys('V_OR_ALT_EDIT.png')
+                if event.ctrl:
+                    draw_keys('V_CTRL_EDIT.png')
+                if event.shift:
+                    draw_keys('V_SHIFT_EDIT.png')
             return {'RUNNING_MODAL'}
         
         if event.type == 'B':
-            draw_keys('B.png')
-            if event.shift:
-                draw_keys('B_SHIFT.png')
-            if event.alt:
-                draw_keys('B_ALT.png')
-            if event.ctrl or event.ctrl and event.alt:
-                draw_keys('B_CTRL_ALT.png')
-            if event.ctrl and event.shift:
-                draw_keys('B_CTRL_SHIFT.png')
+            if context_mode == 'OBJECT':
+                draw_keys('B.png')
+                if event.shift:
+                    draw_keys('B_SHIFT.png')
+                if event.alt:
+                    draw_keys('B_ALT.png')
+                if event.ctrl or event.ctrl and event.alt:
+                    draw_keys('B_CTRL_OR_ALT.png')
+                if event.ctrl and event.shift:
+                    draw_keys('B_CTRL_SHIFT.png')
+
+            if context_mode == 'EDIT_MESH':
+                draw_keys('B_EDIT.png')
+                if event.ctrl:
+                    draw_keys('B_CTRL_EDIT.png')
+                if event.shift:
+                    draw_keys('B_SHIFT_EDIT.png')
+                if event.alt:
+                    draw_keys('B_ALT_EDIT.png')
+                if event.ctrl and event.shift:
+                    draw_keys('B_CTRL_SHIFT_EDIT.png')
             return {'RUNNING_MODAL'}
         
         if event.type == 'N':
-            draw_keys('N.png')
-            if event.ctrl:
-                draw_keys('N_CTRL.png')
+            if context_mode == 'OBJECT':
+                draw_keys('N.png')
+                if event.ctrl:
+                    draw_keys('N_CTRL.png')
+
+            if context_mode == 'EDIT_MESH':
+                draw_keys('N_EDIT.png')
+                if event.ctrl:
+                    draw_keys('N_CTRL_EDIT.png')
+                if event.shift:
+                    draw_keys('N_SHIFT_EDIT.png')
+                if event.alt:
+                    draw_keys('N_ALT_EDIT.png')
+                if event.ctrl and event.shift:
+                    draw_keys('N_CTRL_SHIFT_EDIT.png')
             return {'RUNNING_MODAL'}
         
         if event.type == 'M':
-            draw_keys('M.png')
-            if event.ctrl:
-                draw_keys('M_CTRL.png')
-            if event.shift:
-                draw_keys('M_SHIFT.png')
+            if context_mode == 'OBJECT':
+                draw_keys('M.png')
+                if event.ctrl:
+                    draw_keys('M_CTRL.png')
+                if event.shift:
+                    draw_keys('M_SHIFT.png')
+                    
+            if context_mode == 'EDIT_MESH':
+                draw_keys('M_EDIT.png')
+                if event.ctrl:
+                    draw_keys('M_CTRL_EDIT.png')
+                if event.alt:
+                    draw_keys('M_ALT_EDIT.png')
+                if event.ctrl and event.shift:
+                    draw_keys('M_CTRL_SHIFT_EDIT.png')
             return {'RUNNING_MODAL'}
         
         if event.type == 'COMMA':
