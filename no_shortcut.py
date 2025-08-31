@@ -462,21 +462,46 @@ class NS_OT_no_shortcut(bpy.types.Operator):
             return {'RUNNING_MODAL'}
         
         if event.type == 'J':
-            draw_keys('J.png')
+            if context_mode == 'OBJECT':
+                draw_keys('J.png')
+            
+            if context_mode == 'EDIT_MESH':
+                draw_keys('J_EDIT.png')
+                if event.alt:
+                    draw_keys('J_ALT_EDIT.png')
+
             return {'RUNNING_MODAL'}
+            
         
         if event.type == 'K':
-            draw_keys('K.png')
-            if event.shift:
-                draw_keys('K_SHIFT.png')
+            if context_mode == 'OBJECT':
+                draw_keys('K.png')
+                if event.shift:
+                    draw_keys('K_SHIFT.png')
+            
+            if context_mode == 'EDIT_MESH':
+                draw_keys('K_EDIT.png')
+                if event.shift:
+                    draw_keys('K_SHIFT_EDIT.png')
+
             return {'RUNNING_MODAL'}
         
         if event.type == 'L':
-            draw_keys('L.png')
-            if event.shift:
-                draw_keys('L_SHIFT.png')
-            if event.ctrl:
-                draw_keys('L_CTRL.png')
+            if context_mode == 'OBJECT':
+                draw_keys('L.png')
+                if event.shift:
+                    draw_keys('L_SHIFT.png')
+                if event.ctrl:
+                    draw_keys('L_CTRL.png')
+
+            if context_mode == 'EDIT_MESH':
+                draw_keys('L_EDIT.png')
+                if event.ctrl:
+                    draw_keys('L_CTRL_EDIT.png')
+                if event.shift:
+                    draw_keys('L_SHIFT_EDIT.png')
+                if event.alt:
+                    draw_keys('L_ALT_EDIT.png')
             return {'RUNNING_MODAL'}
         
         if event.type == 'Z':
@@ -494,17 +519,31 @@ class NS_OT_no_shortcut(bpy.types.Operator):
             return {'RUNNING_MODAL'}
         
         if event.type == 'X':
-            draw_keys('X.png')
-            if event.shift:
-                draw_keys('X_SHIFT.png')
+            if context_mode == 'OBJECT':
+                draw_keys('X.png')
+                if event.shift:
+                    draw_keys('X_SHIFT.png')
+
+            if context_mode == 'EDIT_MESH':
+                draw_keys('X_EDIT.png')
+                if event.ctrl:
+                    draw_keys('X_CTRL_EDIT.png')
             return {'RUNNING_MODAL'}
         
         if event.type == 'C':
-            draw_keys('C.png')
-            if event.ctrl:
-                draw_keys('C_CTRL.png')
-            if event.shift:
-                draw_keys('C_SHIFT.png')
+            if context_mode == 'OBJECT':
+                draw_keys('C.png')
+                if event.ctrl:
+                    draw_keys('C_CTRL.png')
+                if event.shift:
+                    draw_keys('C_SHIFT.png')
+
+            if context_mode == 'EDIT_MESH':
+                draw_keys('C_EDIT.png')
+                if event.ctrl:
+                    draw_keys('C_CTRL_EDIT.png')
+                if event.shift:
+                    draw_keys('C_SHIFT_EDIT.png')
             return {'RUNNING_MODAL'}
         
         if event.type == 'V':
@@ -572,7 +611,14 @@ class NS_OT_no_shortcut(bpy.types.Operator):
             return {'RUNNING_MODAL'}
         
         if event.type == 'DEL':
-            draw_keys('DELETE.png')
+            if context_mode == 'OBJECT':
+                draw_keys('DELETE.png')
+
+            if context_mode == 'EDIT_MESH':
+                draw_keys('DELETE_EDIT.png')
+                if event.ctrl:
+                    draw_keys('DELETE_CTRL_EDIT.png')
+
             return {'RUNNING_MODAL'}
         
         if event.type == 'UP_ARROW':
