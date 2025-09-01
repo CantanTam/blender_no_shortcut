@@ -842,7 +842,16 @@ class NS_OT_no_shortcut(bpy.types.Operator):
         
         if event.type == 'LEFTMOUSE':
             bottom_keys.mouse_click = True
-            draw_keys('MOUSE_LEFT.png')
+            draw_keys('MOUSE_LEFT_OR_SHIFT.png')
+            if event.shift:
+                bottom_keys.mouse_click = True
+                draw_keys('MOUSE_LEFT_OR_SHIFT.png')
+            if event.ctrl:
+                bottom_keys.mouse_click = True
+                draw_keys('MOUSE_LEFT_OR_CTRL.png')
+            if event.ctrl and event.shift:
+                bottom_keys.mouse_click = True
+                draw_keys('MOUSE_LEFT_OR_CTRL.png')
             return {'RUNNING_MODAL'}
         
         if event.type == 'RIGHTMOUSE':
@@ -850,10 +859,13 @@ class NS_OT_no_shortcut(bpy.types.Operator):
             draw_keys('MOUSE_RIGHT.png')
             if event.ctrl:
                 bottom_keys.mouse_click = True
-                draw_keys('MOUSE_RIGHT_CTRL.png')
+                draw_keys('MOUSE_RIGHT_CTRL_OR_SHIFT.png')
             if event.shift:
                 bottom_keys.mouse_click = True
                 draw_keys('MOUSE_RIGHT_SHIFT.png')
+            if event.ctrl and event.shift:
+                bottom_keys.mouse_click = True
+                draw_keys('MOUSE_RIGHT_CTRL_OR_SHIFT.png')
             return {'RUNNING_MODAL'}
         
         # 鼠标移动直接 回到 modal
