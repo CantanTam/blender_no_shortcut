@@ -625,15 +625,23 @@ class NS_OT_no_shortcut(bpy.types.Operator):
             return {'RUNNING_MODAL'}
         
         if event.type == 'PERIOD':
-            draw_keys('PERIOD.png')
-            if event.ctrl:
-                draw_keys('PERIOD_CTRL.png')
+            if context_mode == 'OBJECT':
+                draw_keys('PERIOD.png')
+                if event.ctrl:
+                    draw_keys('PERIOD_CTRL.png')
+
+            if context_mode == 'EDIT_MESH':
+                draw_keys('PERIOD_EDIT.png')
             return {'RUNNING_MODAL'}
         
         if event.type == 'SLASH':
-            draw_keys('SLASH.png')
-            if event.alt:
-                draw_keys('SLASH_ALT.png')
+            if context_mode == 'OBJECT':
+                draw_keys('SLASH.png')
+                if event.alt:
+                    draw_keys('SLASH_ALT.png')
+
+            if context_mode == 'EDIT_MESH':
+                draw_keys('SLASH_EDIT.png')
             return {'RUNNING_MODAL'}
         
         if event.type == 'SPACE':
@@ -649,7 +657,10 @@ class NS_OT_no_shortcut(bpy.types.Operator):
             return {'RUNNING_MODAL'}
         
         if event.type == 'HOME':
-            draw_keys('HOME.png')
+            if context_mode == 'OBJECT':
+                draw_keys('HOME.png')
+            if context_mode == 'EDIT_MESH':
+                draw_keys('HOME_EDIT.png')
             return {'RUNNING_MODAL'}
         
         if event.type == 'DEL':
@@ -684,27 +695,61 @@ class NS_OT_no_shortcut(bpy.types.Operator):
             return {'RUNNING_MODAL'}
         
         if event.type == 'NUMPAD_SLASH':
-            draw_keys('NUM_SLASH.png')
-            if event.alt:
-                draw_keys('NUM_SLASH_ALT.png')
-            if event.ctrl or event.shift:
-                draw_keys('NUM_SLASH_CTRL_SHIFT.png')
+            if context_mode == 'OBJECT':
+                draw_keys('NUM_SLASH.png')
+                if event.alt:
+                    draw_keys('NUM_SLASH_ALT.png')
+                if event.ctrl or event.shift:
+                    draw_keys('NUM_SLASH_CTRL_OR_SHIFT.png')
+
+            if context_mode == 'EDIT_MESH':
+                draw_keys('NUM_SLASH_EDIT.png')
             return {'RUNNING_MODAL'}
         
         if event.type == 'NUMPAD_ASTERIX':
-            draw_keys('NUM_ASTERIX.png')
+            if context_mode == 'OBJECT':
+                draw_keys('NUM_ASTERIX.png')
             return {'RUNNING_MODAL'}
         
         if event.type == 'NUMPAD_MINUS':
-            draw_keys('NUM_MINUS.png')
-            if event.ctrl or event.shift:
-                draw_keys('NUM_MINUS_CTRL_SHIFT.png')
+            if context_mode == 'OBJECT':
+                draw_keys('NUM_MINUS_OR_SHIFT.png')
+                if event.shift:
+                    draw_keys('NUM_MINUS_OR_SHIFT.png')
+                if event.ctrl:
+                    draw_keys('NUM_MINUS_CTRL_OR_SHIFT.png')
+                if event.ctrl and event.shift:
+                    draw_keys('NUM_MINUS_CTRL_OR_SHIFT.png')
+
+            if context_mode == 'EDIT_MESH':
+                draw_keys('NUM_MINUS_OR_SHIFT_EDIT.png')
+                if event.shift:
+                    draw_keys('NUM_MINUS_OR_SHIFT_EDIT.png')
+                if event.ctrl:
+                    draw_keys('NUM_MINUS_CTRL_EDIT.png')
+                if event.ctrl and event.shift:
+                    draw_keys('NUM_MINUS_CTRL_SHIFT_EDIT.png')
             return {'RUNNING_MODAL'}
         
         if event.type == 'NUMPAD_PLUS':
-            draw_keys('NUM_PLUS.png')
-            if event.ctrl or event.shift:
-                draw_keys('NUM_PLUS_CTRL_SHIFT.png')
+            if context_mode == 'OBJECT':
+                draw_keys('NUM_PLUS_OR_SHIFT.png')
+                if event.shift:
+                    draw_keys('NUM_PLUS_OR_SHIFT.png')
+                if event.ctrl:
+                    draw_keys('NUM_PLUS_CTRL_OR_SHIFT.png')
+                if event.ctrl and event.shift:
+                    draw_keys('NUM_PLUS_CTRL_OR_SHIFT.png')
+
+            if context_mode == 'EDIT_MESH':
+                draw_keys('NUM_PLUS_OR_SHIFT_EDIT.png')
+                if event.shift:
+                    draw_keys('NUM_PLUS_OR_SHIFT_EDIT.png')
+                if event.ctrl:
+                    draw_keys('NUM_PLUS_CTRL_EDIT.png')
+                if event.ctrl and event.shift:
+                    draw_keys('NUM_PLUS_CTRL_SHIFT_EDIT.png')
+
             return {'RUNNING_MODAL'}
         
         if event.type == 'NUMPAD_7':
@@ -764,7 +809,10 @@ class NS_OT_no_shortcut(bpy.types.Operator):
             return {'RUNNING_MODAL'}
         
         if event.type == 'NUMPAD_PERIOD':
-            draw_keys('NUM_PERIOD.png')
+            if context_mode == 'OBJECT':
+                draw_keys('NUM_PERIOD.png')
+            if context_mode == 'EDIT_MESH':
+                draw_keys('NUM_PERIOD_EDIT.png')
             return {'RUNNING_MODAL'}
         
         if event.type == 'MIDDLEMOUSE':
