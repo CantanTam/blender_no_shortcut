@@ -505,17 +505,31 @@ class NS_OT_no_shortcut(bpy.types.Operator):
             return {'RUNNING_MODAL'}
         
         if event.type == 'Z':
-            draw_keys('Z.png')
-            if event.ctrl:
-                draw_keys('Z_CTRL.png')
-            if event.shift:
-                draw_keys('Z_SHIFT.png')
-            if event.alt:
-                draw_keys('Z_ALT.png')
-            if event.ctrl and event.shift:
-                draw_keys('Z_CTRL_SHIFT.png')
-            if event.shift and event.alt:
-                draw_keys('Z_SHIFT_ALT.png')
+            if context_mode == 'OBJECT':
+                draw_keys('Z.png')
+                if event.ctrl:
+                    draw_keys('Z_CTRL.png')
+                if event.shift:
+                    draw_keys('Z_SHIFT.png')
+                if event.alt:
+                    draw_keys('Z_ALT.png')
+                if event.ctrl and event.shift:
+                    draw_keys('Z_CTRL_SHIFT.png')
+                if event.shift and event.alt:
+                    draw_keys('Z_SHIFT_ALT.png')
+
+            if context_mode == 'EDIT_MESH':
+                draw_keys('Z.png')
+                if event.ctrl:
+                    draw_keys('Z_CTRL.png')
+                if event.shift:
+                    draw_keys('Z_SHIFT_EDIT.png')
+                if event.alt:
+                    draw_keys('Z_ALT_EDIT.png')
+                if event.ctrl and event.shift:
+                    draw_keys('Z_CTRL_SHIFT.png')
+                if event.shift and event.alt:
+                    draw_keys('Z_SHIFT_ALT.png')
             return {'RUNNING_MODAL'}
         
         if event.type == 'X':

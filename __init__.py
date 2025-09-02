@@ -25,7 +25,7 @@ def register_keymaps():
     kc = bpy.context.window_manager.keyconfigs.addon
     if kc:
         km = kc.keymaps.new(name='3D View', space_type='VIEW_3D')
-        kmi = km.keymap_items.new("wm.no_shortcut", type='ACCENT_GRAVE', value='RELEASE', alt=True)
+        kmi = km.keymap_items.new("wm.no_shortcut", type='F5', value='RELEASE')
         addon_keymaps.append((km, kmi))
 
 def unregister_keymaps():
