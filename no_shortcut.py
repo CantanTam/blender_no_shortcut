@@ -47,7 +47,7 @@ class NS_OT_no_shortcut(bpy.types.Operator):
         self.handle_backgroud = bpy.types.SpaceView3D.draw_handler_add(draw_background, (self,context), 'WINDOW', 'POST_PIXEL')
         self.handle_key_shader = bpy.types.SpaceView3D.draw_handler_add(keys_shader.draw_keys_shader, (self,context), 'WINDOW', 'POST_PIXEL')
         #draw_keyboard("KEYBOARD_OBJECT.png")
-        draw_keys('TEST.png')
+        draw_keys('HELP.png')
 
 
         context.window_manager.modal_handler_add(self)
