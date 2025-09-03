@@ -855,31 +855,63 @@ class NS_OT_no_shortcut(bpy.types.Operator):
             return {'RUNNING_MODAL'}
         
         if event.type == 'LEFTMOUSE':
-            bottom_keys.mouse_click = True
-            draw_keys('MOUSE_LEFT_OR_SHIFT.png')
-            if event.shift:
+            if context_mode == 'OBJECT':
                 bottom_keys.mouse_click = True
                 draw_keys('MOUSE_LEFT_OR_SHIFT.png')
-            if event.ctrl:
+                if event.shift:
+                    bottom_keys.mouse_click = True
+                    draw_keys('MOUSE_LEFT_OR_SHIFT.png')
+                if event.ctrl:
+                    bottom_keys.mouse_click = True
+                    draw_keys('MOUSE_LEFT_OR_CTRL.png')
+                if event.ctrl and event.shift:
+                    bottom_keys.mouse_click = True
+                    draw_keys('MOUSE_LEFT_OR_CTRL.png')
+
+            if context_mode == 'EDIT_MESH':
                 bottom_keys.mouse_click = True
-                draw_keys('MOUSE_LEFT_OR_CTRL.png')
-            if event.ctrl and event.shift:
-                bottom_keys.mouse_click = True
-                draw_keys('MOUSE_LEFT_OR_CTRL.png')
+                draw_keys('MOUSE_LEFT_OR_CTRL_OR_SHIFT_EDIT.png')
+                if event.ctrl:
+                    bottom_keys.mouse_click = True
+                    draw_keys('MOUSE_LEFT_CTRL_OR_SHIFT_EDIT.png')
+                if event.shift:
+                    bottom_keys.mouse_click = True
+                    draw_keys('MOUSE_LEFT_OR_CTRL_OR_SHIFT_EDIT.png')
+                if event.alt:
+                    bottom_keys.mouse_click = True
+                    draw_keys('MOUSE_LEFT_ALT_OR_SHIFT_EDIT.png')
+                if event.ctrl and event.alt:
+                    bottom_keys.mouse_click = True
+                    draw_keys('MOUSE_LEFT_CTRL_ALT_OR_SHIFT_EDIT.png')
+                if event.ctrl and event.shift:
+                    bottom_keys.mouse_click = True
+                    draw_keys('MOUSE_LEFT_CTRL_OR_SHIFT_EDIT.png')
+
             return {'RUNNING_MODAL'}
         
         if event.type == 'RIGHTMOUSE':
-            bottom_keys.mouse_click = True
-            draw_keys('MOUSE_RIGHT.png')
-            if event.ctrl:
+            if context_mode == 'OBJECT':
                 bottom_keys.mouse_click = True
-                draw_keys('MOUSE_RIGHT_CTRL_OR_SHIFT.png')
-            if event.shift:
+                draw_keys('MOUSE_RIGHT.png')
+                if event.ctrl:
+                    bottom_keys.mouse_click = True
+                    draw_keys('MOUSE_RIGHT_CTRL_OR_SHIFT.png')
+                if event.shift:
+                    bottom_keys.mouse_click = True
+                    draw_keys('MOUSE_RIGHT_SHIFT.png')
+                if event.ctrl and event.shift:
+                    bottom_keys.mouse_click = True
+                    draw_keys('MOUSE_RIGHT_CTRL_OR_SHIFT.png')
+
+            if context_mode == 'EDIT_MESH':
                 bottom_keys.mouse_click = True
-                draw_keys('MOUSE_RIGHT_SHIFT.png')
-            if event.ctrl and event.shift:
-                bottom_keys.mouse_click = True
-                draw_keys('MOUSE_RIGHT_CTRL_OR_SHIFT.png')
+                draw_keys('MOUSE_RIGHT_OR_CTRL_OR_SHIFT_EDIT.png')
+                if event.ctrl:
+                    bottom_keys.mouse_click = True
+                    draw_keys('MOUSE_RIGHT_CTRL_OR_SHIFT_EDIT.png')
+                if event.shift:
+                    bottom_keys.mouse_click = True
+                    draw_keys('MOUSE_RIGHT_SHIFT_EDIT.png')
             return {'RUNNING_MODAL'}
         
         # 鼠标移动直接 回到 modal
